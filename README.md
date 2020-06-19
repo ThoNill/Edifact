@@ -1,7 +1,6 @@
-Testdaten
+Edifact
 
-Erzeugung von Testdaten
-
+Edifact Dateien einlesen.
 
 
  
