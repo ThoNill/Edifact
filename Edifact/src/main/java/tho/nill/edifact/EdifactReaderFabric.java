@@ -3,7 +3,6 @@ package tho.nill.edifact;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Iterator;
-import java.util.Optional;
 
 public class EdifactReaderFabric implements Iterable<Segment> {
 	private TagProvider tags;

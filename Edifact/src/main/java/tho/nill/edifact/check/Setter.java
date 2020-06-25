@@ -1,6 +1,6 @@
 package tho.nill.edifact.check;
 
-@FunctionalInterface
-public interface Setter {
-	void set(String text);
+import java.util.function.Consumer;
+
+public interface Setter extends Consumer<String>{
 }

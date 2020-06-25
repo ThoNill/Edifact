@@ -1,6 +1,7 @@
 package tho.nill.edifact;
 
 public class AlmostEnum implements LikeAnEnum {
+
 	private int ordinal;
 	private String name;
 	
@@ -21,4 +22,8 @@ public class AlmostEnum implements LikeAnEnum {
 		return name;
 	}
 
+	@Override
+	public String toString() {
+		return "(" + ordinal + ") " + name;
+	}
 }

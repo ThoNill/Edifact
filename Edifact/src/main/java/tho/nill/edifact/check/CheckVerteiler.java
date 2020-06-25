@@ -2,13 +2,8 @@ package tho.nill.edifact.check;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
-import java.util.concurrent.Flow.Publisher;
-import java.util.concurrent.Flow.Subscriber;
 import java.util.function.Function;
 
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.FluxExtensionsKt;
 import tho.nill.edifact.EdifactException;
 import tho.nill.edifact.LikeAnEnum;
 import tho.nill.edifact.Segment;

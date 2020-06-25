@@ -1,12 +1,10 @@
 package tho.nill.test.edifact;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 import org.junit.Test;
@@ -18,7 +16,6 @@ import tho.nill.edifact.UNA;
 import tho.nill.edifact.check.CheckVerteiler;
 import tho.nill.edifact.check.EdifactError;
 import tho.nill.edifact.check.PartSetter;
-import tho.nill.edifact.check.TagAction;
 import tho.nill.edifact.check.builder.Between;
 import tho.nill.edifact.check.builder.Blank;
 import tho.nill.edifact.check.builder.CheckBuilder;
@@ -26,24 +23,36 @@ import tho.nill.edifact.check.builder.Min;
 import tho.nill.edifact.check.builder.NotBlank;
 import tho.nill.edifact.check.builder.Numeric;
 import tho.nill.edifact.check.builder.Regexp;
+import tho.nill.edifact.zelt.SetterList;
 
 public class CheckAndActionTest {
 
 	@Test
 	public void testAction() {
 
-		TestZelt h = new TestZelt();
+		TestObject h = new TestObject();
 		PartSetter s = new PartSetter(h::setX, 1, 0);
-		TagAction a = new TagAction(x -> "UNH".equals(x.name()), h::create);
-
 		
 		Segment seg = createSegment("UNH+123+456+789'");
-		s.perform(seg);
-		a.perform(seg);
+		s.accept(seg);
 		
 		assertEquals("456", h.getX());
-		assertEquals("create", h.getLastCommand());
 	}
+
+	@Test
+	public void testZeltActions() {
+
+		TestObject h = new TestObject();
+	
+		
+		Segment seg = createSegment("UNH+123+456+789'");
+		Consumer<Segment> l = new SetterList(h::setX,h::setY);
+		l.accept(seg);
+		
+		assertEquals("123", h.getX());
+		assertEquals("456", h.getY());
+	}
+	
 	
 	@Test
 	public void testCheck() {
@@ -113,10 +122,6 @@ public class CheckAndActionTest {
 		TagProvider tags = new TagProvider();
 		return una.createSegment(buffer, reader, tags).get();
 	}
-// ßdef( ................ )
-// ßsave( .................. )
-// ßref(  << ................. )
-// ßtangle( ............ )
-// ßwave( ............... )	
+	
 }
 

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.Optional;
+
 import lombok.NonNull;
 
 public class ReadWithBuffer implements Iterator<Character> {
